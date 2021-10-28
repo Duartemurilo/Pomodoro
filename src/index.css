@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  height: 100vh;
+  padding: 20px;
+  justify-content: center;
+  transition: background-color 300ms ease-in-out;
+  line-height: 1.5;
+
+  background: linear-gradient(315deg, rgba(122, 92, 255, 1) 7%, rgba(82, 182, 196, 1) 87%);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.working {
+  background: linear-gradient(315deg, rgba(255, 92, 92, 1) 7%, rgba(196, 82, 134, 1) 87%);
+}
+
+.hidden {
+  display: none;
+}
