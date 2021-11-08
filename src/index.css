@@ -11,10 +11,11 @@ body {
   font-family: sans-serif;
   height: 100vh;
   padding: 20px;
+  width: 100%;
   justify-content: center;
   transition: background-color 300ms ease-in-out;
   line-height: 1.5;
-
+  overflow: hidden;
   background: linear-gradient(315deg, rgba(122, 92, 255, 1) 7%, rgba(82, 182, 196, 1) 87%);
 }
 
@@ -24,6 +25,7 @@ body {
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  align-items: center;
 }
 
 .working {
@@ -32,4 +34,9 @@ body {
 
 .hidden {
   display: none;
+}
+
+.workingStatistic {
+  background: linear-gradient(315deg, rgba(255, 92, 92, 1) 7%, rgba(196, 82, 134, 1) 87%);
+  opacity: 0.4;
 }

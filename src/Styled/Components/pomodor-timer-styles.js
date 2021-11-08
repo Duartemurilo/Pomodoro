@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import breakPoints from '../../Constants/breakPoints'
+import breakPoints from '../../Constants/BreakPoints'
 
 export const BodyPomodoroTimer = styled.div`
   display: flex;
@@ -22,13 +22,19 @@ export const BodyPomodoroTimer = styled.div`
     background: none;
 
     :hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
       background: white;
       color: black;
     }
   }
   ${`@media only screen and ${breakPoints.device.cel}{
-   
+
+    h1{
+      font-size: 24px;
+    }
+    button{
+      font-size: 18px;
+    }
   }`}
 `
 export const DivButtons = styled.div`

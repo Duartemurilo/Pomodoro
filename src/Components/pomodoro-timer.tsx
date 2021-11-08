@@ -4,12 +4,20 @@ import { useInterval } from '../hooks/use-interval'
 import { BodyPomodoroTimer, DivButtons } from '../Styled/Components/pomodor-timer-styles'
 import Button from './button'
 import Timer from './Timer'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import { secondsToTime } from '../Services/seconds-to-time'
 
 interface Props {
   pomodoroTimer: number
   shortRestTimer: number
   longRestTime: number
   cycles: number
+  setFullWorkingTime: any
+  setCompletedCycles: any
+  setNumberOfPomodoros: any
+  completedCycles: number
+  numberOfPomodoros: number
+  fullWorkingTime: number
 }
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -30,17 +38,18 @@ function Pomodorotimer(props: Props): JSX.Element {
   useInterval(
     () => {
       setMainTime(mainTime - 1)
+      if (working) props.setFullWorkingTime(props.fullWorkingTime + 1)
     },
     timeCounting ? 1000 : null
   )
 
-  const configWork = () => {
+  const configWork = useCallback(() => {
     setTimeCounting(true)
     setWorking(true)
     setResting(false)
     setMainTime(props.pomodoroTimer)
     audioStartWorking.play()
-  }
+  }, [props.pomodoroTimer])
 
   const stopWork = () => {
     setTimeCounting(!timeCounting)
@@ -75,19 +84,24 @@ function Pomodorotimer(props: Props): JSX.Element {
     } else if (working && cycles.length <= 0) {
       configRest(true)
       setCycles(new Array(props.cycles - 1).fill(true))
+      props.setCompletedCycles(props.completedCycles + 1)
     }
-  }, [working, resting, mainTime, configRest, cycles, props.cycles])
+
+    if (working) props.setNumberOfPomodoros(props.numberOfPomodoros + 1)
+    if (resting) configWork()
+  }, [working, resting, mainTime, configRest, cycles, props, configWork])
 
   return (
     <BodyPomodoroTimer>
-      <h1>Você esta Trabalhando</h1>
+      {working ? <h1>Você esta Trabalhando</h1> : <h1>Você esta Descansando </h1>}
+
       <Timer mainTime={mainTime} />
 
       <DivButtons>
         <Button text={'Começar'} onClick={() => configWork()} />
         <Button
           className={!working && !resting ? 'hidden' : ''}
-          text={timeCounting ? 'Pausar' : 'play'}
+          text={timeCounting ? 'Pausar' : <PlayArrowIcon style={{ fontSize: 30 }} />}
           onClick={() => stopWork()}
         />
         <Button text={'Descansar'} onClick={() => configRest(false)} />

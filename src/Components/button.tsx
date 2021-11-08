@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface Props {
-  text: string
+  text: any
   onClick?: () => void
   className?: string
 }
@@ -9,7 +9,7 @@ interface Props {
 function Button(props: Props): JSX.Element {
   return (
     <button className={props.className} onClick={props.onClick}>
-      {props.text}
+      <p>{props.text}</p>
     </button>
   )
 }
