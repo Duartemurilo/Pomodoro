@@ -93,9 +93,15 @@ function Pomodorotimer(props: Props): JSX.Element {
 
   return (
     <BodyPomodoroTimer>
-      {working ? <h1>Você esta Trabalhando</h1> : <h1>Você esta Descansando </h1>}
-
-      <Timer mainTime={mainTime} />
+      {working ? (
+        <>
+          <h1>Você esta Trabalhando</h1> <Timer mainTime={mainTime} />
+        </>
+      ) : (
+        <>
+          <h1>Você esta Descansando </h1> <Timer mainTime={mainTime} />
+        </>
+      )}
 
       <DivButtons>
         <Button text={'Começar'} onClick={() => configWork()} />
